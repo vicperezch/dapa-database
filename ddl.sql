@@ -1,19 +1,19 @@
-CREATE TABLE serviceType (
+CREATE TABLE service_type (
     id SERIAL PRIMARY KEY,
     description VARCHAR(25)
 );
 
-CREATE TABLE paymentMethod (
+CREATE TABLE payment_method (
     id SERIAL PRIMARY KEY,
     description VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE paymentIndicator (
+CREATE TABLE payment_indicator (
     id SERIAL PRIMARY KEY,
     description VARCHAR(25) NOT NULL
 );
 
-CREATE TABLE expenseType (
+CREATE TABLE expense_type (
     id SERIAL PRIMARY KEY,
     description VARCHAR(50) NOT NULL
 );
@@ -34,7 +34,7 @@ CREATE TABLE states (
     description VARCHAR NOT NULL
 );
 
-CREATE TABLE clientAddresses (
+CREATE TABLE client_addresses (
     id SERIAL PRIMARY KEY,
     address VARCHAR(100) NOT NULL
 );
@@ -49,8 +49,10 @@ CREATE TABLE users (
 
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
+	user_id INTEGER NOT NULL,
     password VARCHAR(50) NOT NULL,
-    role VARCHAR(20) NOT NULL
+    role VARCHAR(20) NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE quotes (
@@ -89,7 +91,7 @@ CREATE TABLE orders (
     FOREIGN KEY (state_id) REFERENCES states(id)
 );
 
-CREATE TABLE financialReports (
+CREATE TABLE financial_reports (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
     total_income DECIMAL(10,2),
@@ -104,8 +106,8 @@ CREATE TABLE incomes (
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     amount DECIMAL(10,2) CHECK (amount > 0),
     financial_report_id INTEGER NOT NULL,
-    FOREIGN KEY (payment_method_id) REFERENCES paymentMethod(id),
-    FOREIGN KEY (financial_report_id) REFERENCES financialReports(id)
+    FOREIGN KEY (payment_method_id) REFERENCES payment_method(id),
+    FOREIGN KEY (financial_report_id) REFERENCES financial_reports(id)
 );
 
 CREATE TABLE expenses (
@@ -117,13 +119,13 @@ CREATE TABLE expenses (
     financial_report_id INTEGER NOT NULL,
     amount DECIMAL(10,2) CHECK (amount > 0),
     type_id INTEGER,
-    FOREIGN KEY (payment_method_id) REFERENCES paymentMethod(id),
-    FOREIGN KEY (payment_indicator_id) REFERENCES paymentIndicator(id),
-    FOREIGN KEY (financial_report_id) REFERENCES financialReports(id),
-    FOREIGN KEY (type_id) REFERENCES expenseType(id) ON DELETE RESTRICT
+    FOREIGN KEY (payment_method_id) REFERENCES payment_method(id),
+    FOREIGN KEY (payment_indicator_id) REFERENCES payment_indicator(id),
+    FOREIGN KEY (financial_report_id) REFERENCES financial_reports(id),
+    FOREIGN KEY (type_id) REFERENCES expense_type(id) ON DELETE RESTRICT
 );
 
-CREATE TABLE performanceReports (
+CREATE TABLE performance_reports (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
     driver_id INTEGER NOT NULL,
