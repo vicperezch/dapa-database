@@ -22,7 +22,7 @@ CREATE TABLE vehicles (
     id SERIAL PRIMARY KEY,
     brand VARCHAR(50) NOT NULL,
     model VARCHAR(50) NOT NULL,
-    license_plate VARCHAR(15) NOT NULL UNIQUE,
+    license_plate VARCHAR(15) NOT NULL,
     capacity_kg DECIMAL(10,2) CHECK (capacity_kg > 0),
     available BOOLEAN,
     current_mileage DECIMAL(10,2) NOT NULL CHECK (current_mileage > 0),
