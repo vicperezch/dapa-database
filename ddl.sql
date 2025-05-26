@@ -50,6 +50,7 @@ CREATE TABLE users (
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
 	user_id INTEGER NOT NULL,
+	license_expiration_date DATE,
     password VARCHAR(255) NOT NULL,
     role VARCHAR(20) NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
