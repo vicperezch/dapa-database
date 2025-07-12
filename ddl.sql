@@ -143,3 +143,36 @@ CREATE TABLE notifications (
     date TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+CREATE TABLE question_types (
+	id SERIAL PRIMARY KEY,
+	type VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE questions (
+	id SERIAL PRIMARY KEY,
+	question VARCHAR(50) NOT NULL,
+	description VARCHAR(255) DEFAULT NULL,
+	type_id INTEGER NOT NULL,
+	is_active BOOLEAN NOT NULL DEFAULT TRUE,
+	FOREIGN KEY (type_id) REFERENCES question_types(id)
+);
+
+CREATE TABLE question_options (
+	id SERIAL PRIMARY KEY,
+	question_id INTEGER NOT NULL,
+	option VARCHAR(50) NOT NULL,
+	FOREIGN KEY (question_id) REFERENCES questions(id)
+);
+
+CREATE TABLE answers (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	question_id INTEGER,
+	answer TEXT,
+	option_id INTEGER,
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	FOREIGN KEY (question_id) REFERENCES questions(id),
+	FOREIGN KEY (option_id) REFERENCES question_options(id)
+);
+
