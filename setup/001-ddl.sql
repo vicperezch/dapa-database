@@ -1,3 +1,5 @@
+CREATE type form_status AS ENUM('pending', 'cancelled', 'approved');
+
 CREATE TABLE service_type (
     id SERIAL PRIMARY KEY,
     description VARCHAR(25)
@@ -54,42 +56,6 @@ CREATE TABLE employees (
     password VARCHAR(255) NOT NULL,
     role VARCHAR(20) NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE quotes (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    state_id INTEGER NOT NULL,
-    service_type INTEGER NOT NULL,
-    total_amount DECIMAL(10,2) NOT NULL,
-    date DATE NOT NULL DEFAULT CURRENT_DATE,
-    details TEXT,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT,
-    FOREIGN KEY (state_id) REFERENCES states(id)
-);
-
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    description TEXT,
-    weight_kg DECIMAL(10,2) CHECK (weight_kg > 0),
-    dimensions DECIMAL(10,2),
-    is_fragile BOOLEAN NOT NULL,
-    quote_id INTEGER NOT NULL,
-    FOREIGN KEY (quote_id) REFERENCES quotes(id)
-);
-
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    quote_id INTEGER NOT NULL,
-    driver_id INTEGER NOT NULL,
-    vehicle_id INTEGER NOT NULL,
-    origin VARCHAR(100) NOT NULL,
-    destination VARCHAR(100) NOT NULL,
-    state_id INTEGER NOT NULL,
-    FOREIGN KEY (quote_id) REFERENCES quotes(id),
-    FOREIGN KEY (driver_id) REFERENCES employees(id),
-    FOREIGN KEY (vehicle_id) REFERENCES vehicles(id),
-    FOREIGN KEY (state_id) REFERENCES states(id)
 );
 
 CREATE TABLE financial_reports (
@@ -165,14 +131,62 @@ CREATE TABLE question_options (
 	FOREIGN KEY (question_id) REFERENCES questions(id)
 );
 
+CREATE TABLE submissions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	status form_status NOT NULL DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 CREATE TABLE answers (
 	id SERIAL PRIMARY KEY,
-	user_id INTEGER NOT NULL,
+	submission_id INTEGER NOT NULL,
 	question_id INTEGER,
 	answer TEXT,
 	option_id INTEGER,
-	FOREIGN KEY (user_id) REFERENCES users(id),
+	FOREIGN KEY (submission_id) REFERENCES submissions(id),
 	FOREIGN KEY (question_id) REFERENCES questions(id),
 	FOREIGN KEY (option_id) REFERENCES question_options(id)
+);
+
+CREATE TABLE quotes (
+    id SERIAL PRIMARY KEY,
+	submission_id INTEGER NOT NULL,
+	driver_id INTEGER,
+	vehicle_id INTEGER,
+    state_id INTEGER NOT NULL,
+    service_type INTEGER NOT NULL,
+    total_amount DECIMAL(10,2) NOT NULL,
+    date DATE NOT NULL DEFAULT CURRENT_DATE,
+    details TEXT,
+    FOREIGN KEY (state_id) REFERENCES states(id),
+	FOREIGN KEY (submission_id) REFERENCES submissions(id),
+	FOREIGN KEY (driver_id) REFERENCES employees(id),
+	FOREIGN KEY (vehicle_id) REFERENCES vehicles(id)
+);
+
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    description TEXT,
+    weight_kg DECIMAL(10,2) CHECK (weight_kg > 0),
+    dimensions DECIMAL(10,2),
+    is_fragile BOOLEAN NOT NULL,
+    quote_id INTEGER NOT NULL,
+    FOREIGN KEY (quote_id) REFERENCES quotes(id)
+);
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    quote_id INTEGER NOT NULL,
+    driver_id INTEGER NOT NULL,
+    vehicle_id INTEGER NOT NULL,
+    origin VARCHAR(100) NOT NULL,
+    destination VARCHAR(100) NOT NULL,
+    state_id INTEGER NOT NULL,
+    FOREIGN KEY (quote_id) REFERENCES quotes(id),
+    FOREIGN KEY (driver_id) REFERENCES employees(id),
+    FOREIGN KEY (vehicle_id) REFERENCES vehicles(id),
+    FOREIGN KEY (state_id) REFERENCES states(id)
 );
 
