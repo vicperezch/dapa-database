@@ -1,24 +1,18 @@
+-- ENUMS
 CREATE type form_status AS ENUM('pending', 'cancelled', 'approved');
 CREATE type role AS ENUM('admin', 'driver');
+CREATE type order_type AS ENUM('corporate', 'business', 'personal');
+CREATE type order_status AS ENUM('pending', 'assigned', 'pickup', 'collected', 'delivered');
 
-CREATE TABLE service_types (
-    id SERIAL PRIMARY KEY,
-    description VARCHAR(25)
-);
-
+-- TABLAS
 CREATE TABLE vehicles (
     id SERIAL PRIMARY KEY,
     brand VARCHAR(50) NOT NULL,
     model VARCHAR(50) NOT NULL,
     license_plate VARCHAR(15) NOT NULL,
     capacity_kg DECIMAL(10,2) CHECK (capacity_kg > 0),
-    available BOOLEAN,
-	insurance DATE NOT NULL DEFAULT CURRENT_DATE
-);
-
-CREATE TABLE statuses (
-    id SERIAL PRIMARY KEY,
-    description VARCHAR(25) NOT NULL
+    available BOOLEAN NOT NULL DEFAULT true,
+	insurance DATE NOT NULL
 );
 
 CREATE TABLE users (
@@ -42,7 +36,9 @@ CREATE TABLE questions (
 	question VARCHAR(50) NOT NULL,
 	description VARCHAR(255) DEFAULT NULL,
 	type_id INTEGER NOT NULL,
-	is_active BOOLEAN NOT NULL DEFAULT TRUE,
+	is_active BOOLEAN NOT NULL DEFAULT true,
+	position INTEGER NOT NULL DEFAULT 1,
+	deleted_at TIMESTAMP DEFAULT NULL,
 	FOREIGN KEY (type_id) REFERENCES question_types(id)
 );
 
@@ -55,14 +51,14 @@ CREATE TABLE question_options (
 
 CREATE TABLE submissions (
     id SERIAL PRIMARY KEY,
-    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    submitted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	status form_status NOT NULL DEFAULT 'pending'
 );
 
 CREATE TABLE answers (
 	id SERIAL PRIMARY KEY,
 	submission_id INTEGER NOT NULL,
-	question_id INTEGER,
+	question_id INTEGER NOT NULL,
 	answer TEXT,
 	option_id INTEGER,
 	FOREIGN KEY (submission_id) REFERENCES submissions(id),
@@ -77,13 +73,13 @@ CREATE TABLE orders (
     origin VARCHAR(100) NOT NULL,
     destination VARCHAR(100) NOT NULL,
 	total_amount DECIMAL(10, 2) NOT NULL,
-    status_id INTEGER NOT NULL,
 	details TEXT,
-	service_type_id INTEGER NOT NULL,
+	status order_status NOT NULL default 'pending',
+	type order_type NOT NULL,
 	date DATE NOT NULL DEFAULT CURRENT_DATE,
+	submission_id INTEGER NOT NULL UNIQUE,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (vehicle_id) REFERENCES vehicles(id),
-    FOREIGN KEY (status_id) REFERENCES statuses(id),
-    FOREIGN KEY (service_type_id) REFERENCES service_types(id)
+    FOREIGN KEY (submission_id) REFERENCES submissions(id)
 );
 
