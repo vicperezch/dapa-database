@@ -46,6 +46,7 @@ CREATE TABLE question_options (
 	id SERIAL PRIMARY KEY,
 	question_id INTEGER NOT NULL,
 	option VARCHAR(50) NOT NULL,
+	deleted_at TIMESTAMP DEFAULT NULL,
 	FOREIGN KEY (question_id) REFERENCES questions(id)
 );
 
