@@ -11,7 +11,7 @@ CREATE TABLE vehicles (
     model VARCHAR(50) NOT NULL,
     license_plate VARCHAR(15) NOT NULL,
     capacity_kg DECIMAL(10,2) CHECK (capacity_kg > 0),
-    available BOOLEAN NOT NULL DEFAULT true,
+    is_available BOOLEAN NOT NULL DEFAULT true,
 	insurance DATE NOT NULL
 );
 
@@ -69,8 +69,8 @@ CREATE TABLE answers (
 
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    vehicle_id INTEGER NOT NULL,
+    user_id INTEGER,
+    vehicle_id INTEGER,
     origin VARCHAR(100) NOT NULL,
     destination VARCHAR(100) NOT NULL,
 	total_amount DECIMAL(10, 2) NOT NULL,

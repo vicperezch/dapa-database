@@ -1,4 +1,4 @@
-INSERT INTO vehicles (brand, model, license_plate, capacity_kg, available, insurance) VALUES
+INSERT INTO vehicles (brand, model, license_plate, capacity_kg, is_available, insurance) VALUES
 ('Toyota', 'Hilux', 'ABC123', 1000.00, true, '2024-12-31'),
 ('Ford', 'Transit', 'DEF456', 1500.00, true, '2024-11-30'),
 ('Mercedes', 'Sprinter', 'GHI789', 2000.00, false, '2025-01-15'),
