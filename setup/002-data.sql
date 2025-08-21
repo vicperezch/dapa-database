@@ -135,82 +135,82 @@ INSERT INTO submissions (submitted_at, status) VALUES
 ('2023-01-24 15:00:00', 'approved'),
 ('2023-01-25 16:15:00', 'pending');
 
-INSERT INTO answers (submission_id, question_id, answer, option_id) VALUES
+INSERT INTO answers (submission_id, question_id, answer) VALUES
 -- Submission 1
-(1, 1, NULL, 1), -- Vehicle type: Sedan (dropdown)
-(1, 3, NULL, 9), -- Payment: Credit card (unique)
+(1, 1, NULL), -- Vehicle type: Sedan (dropdown)
+(1, 3, NULL), -- Payment: Credit card (unique)
 -- Submission 2
-(2, 2, NULL, 5), -- Services: Oil change (multiple)
-(2, 4, NULL, 13), -- Contact time: Morning (dropdown)
+(2, 2, NULL), -- Services: Oil change (multiple)
+(2, 4, NULL), -- Contact time: Morning (dropdown)
 -- Submission 3
-(3, 5, NULL, 17), -- Insurance: Collision (multiple)
-(3, 6, NULL, 21), -- Delivery: Standard (unique)
+(3, 5, NULL), -- Insurance: Collision (multiple)
+(3, 6, NULL), -- Delivery: Standard (unique)
 -- Submission 4
-(4, 7, NULL, 25), -- Features: Sunroof (multiple)
-(4, 8, NULL, 29), -- Fuel: Gasoline (unique)
+(4, 7, NULL), -- Features: Sunroof (multiple)
+(4, 8, NULL), -- Fuel: Gasoline (unique)
 -- Submission 5
-(5, 9, NULL, 33), -- Service intervals: Monthly (dropdown)
-(5, 10, NULL, 37), -- Equipment: Roof rack (multiple)
+(5, 9, NULL), -- Service intervals: Monthly (dropdown)
+(5, 10, NULL), -- Equipment: Roof rack (multiple)
 -- Submission 6
-(6, 11, NULL, 41), -- Mechanic: Dealer A (unique)
-(6, 12, NULL, 45), -- Tires: All-season (dropdown)
+(6, 11, NULL), -- Mechanic: Dealer A (unique)
+(6, 12, NULL), -- Tires: All-season (dropdown)
 -- Submission 7
-(7, 13, NULL, 49), -- Roadside: Towing (multiple)
-(7, 14, NULL, 53), -- Warranty: Basic (unique)
+(7, 13, NULL), -- Roadside: Towing (multiple)
+(7, 14, NULL), -- Warranty: Basic (unique)
 -- Submission 8
-(8, 15, NULL, 57), -- Color: Red (dropdown)
-(8, 16, NULL, 61), -- Accessories: Floor mats (multiple)
+(8, 15, NULL), -- Color: Red (dropdown)
+(8, 16, NULL), -- Accessories: Floor mats (multiple)
 -- Submission 9
-(9, 17, NULL, 65), -- Service package: Bronze (unique)
-(9, 18, NULL, 69), -- Insurance add-ons: Glass (dropdown)
+(9, 17, NULL), -- Service package: Bronze (unique)
+(9, 18, NULL), -- Insurance add-ons: Glass (dropdown)
 -- Submission 10
-(10, 19, NULL, 73), -- Safety: ABS (multiple)
-(10, 20, NULL, 77), -- Payment freq: Monthly (unique)
+(10, 19, NULL), -- Safety: ABS (multiple)
+(10, 20, NULL), -- Payment freq: Monthly (unique)
 -- Submission 11
-(11, 21, NULL, 81), -- Size: Compact (dropdown)
-(11, 22, NULL, 85), -- Comfort: Climate control (multiple)
+(11, 21, NULL), -- Size: Compact (dropdown)
+(11, 22, NULL), -- Comfort: Climate control (multiple)
 -- Submission 12
-(12, 23, NULL, 89), -- Lease: 12 months (unique)
-(12, 24, NULL, 93), -- Maintenance: Basic (dropdown)
+(12, 23, NULL), -- Lease: 12 months (unique)
+(12, 24, NULL), -- Maintenance: Basic (dropdown)
 -- Submission 13
-(13, 25, NULL, 97), -- Tech: Audio upgrade (multiple)
-(13, 1, NULL, 2), -- Vehicle type: SUV (dropdown)
+(13, 25, NULL), -- Tech: Audio upgrade (multiple)
+(13, 1, NULL), -- Vehicle type: SUV (dropdown)
 -- Submission 14
-(14, 2, NULL, 6), -- Services: Tire rotation (multiple)
-(14, 3, NULL, 10), -- Payment: Debit card (unique)
+(14, 2, NULL), -- Services: Tire rotation (multiple)
+(14, 3, NULL), -- Payment: Debit card (unique)
 -- Submission 15
-(15, 4, NULL, 14), -- Contact time: Afternoon (dropdown)
-(15, 5, NULL, 18), -- Insurance: Comprehensive (multiple)
+(15, 4, NULL), -- Contact time: Afternoon (dropdown)
+(15, 5, NULL), -- Insurance: Comprehensive (multiple)
 -- Submission 16
-(16, 6, NULL, 22), -- Delivery: Express (unique)
-(16, 7, NULL, 26), -- Features: Leather seats (multiple)
+(16, 6, NULL), -- Delivery: Express (unique)
+(16, 7, NULL), -- Features: Leather seats (multiple)
 -- Submission 17
-(17, 8, NULL, 30), -- Fuel: Diesel (unique)
-(17, 9, NULL, 34), -- Service intervals: Quarterly (dropdown)
+(17, 8, NULL), -- Fuel: Diesel (unique)
+(17, 9, NULL), -- Service intervals: Quarterly (dropdown)
 -- Submission 18
-(18, 10, NULL, 38), -- Equipment: Trailer hitch (multiple)
-(18, 11, NULL, 42), -- Mechanic: Dealer B (unique)
+(18, 10, NULL), -- Equipment: Trailer hitch (multiple)
+(18, 11, NULL), -- Mechanic: Dealer B (unique)
 -- Submission 19
-(19, 12, NULL, 46), -- Tires: Winter (dropdown)
-(19, 13, NULL, 50), -- Roadside: Jump start (multiple)
+(19, 12, NULL), -- Tires: Winter (dropdown)
+(19, 13, NULL), -- Roadside: Jump start (multiple)
 -- Submission 20
-(20, 14, NULL, 54), -- Warranty: Extended (unique)
-(20, 15, NULL, 58), -- Color: Blue (dropdown)
+(20, 14, NULL), -- Warranty: Extended (unique)
+(20, 15, NULL), -- Color: Blue (dropdown)
 -- Submission 21
-(21, 16, NULL, 62), -- Accessories: Phone holder (multiple)
-(21, 17, NULL, 66), -- Service package: Silver (unique)
+(21, 16, NULL), -- Accessories: Phone holder (multiple)
+(21, 17, NULL), -- Service package: Silver (unique)
 -- Submission 22
-(22, 18, NULL, 70), -- Insurance add-ons: Rental car (dropdown)
-(22, 19, NULL, 74), -- Safety: Backup camera (multiple)
+(22, 18, NULL), -- Insurance add-ons: Rental car (dropdown)
+(22, 19, NULL), -- Safety: Backup camera (multiple)
 -- Submission 23
-(23, 20, NULL, 78), -- Payment freq: Bi-weekly (unique)
-(23, 21, NULL, 82), -- Size: Midsize (dropdown)
+(23, 20, NULL), -- Payment freq: Bi-weekly (unique)
+(23, 21, NULL), -- Size: Midsize (dropdown)
 -- Submission 24
-(24, 22, NULL, 86), -- Comfort: Massage seats (multiple)
-(24, 23, NULL, 90), -- Lease: 24 months (unique)
+(24, 22, NULL), -- Comfort: Massage seats (multiple)
+(24, 23, NULL), -- Lease: 24 months (unique)
 -- Submission 25
-(25, 24, NULL, 94), -- Maintenance: Standard (dropdown)
-(25, 25, NULL, 98); -- Tech: Navigation (multiple)
+(25, 24, NULL), -- Maintenance: Standard (dropdown)
+(25, 25, NULL); -- Tech: Navigation (multiple)
 
 INSERT INTO orders (user_id, vehicle_id, origin, destination, total_amount, details, status, type, date, submission_id) VALUES
 (1, 1, 'New York', 'Boston', 150.00, 'Fragile items', 'delivered', 'business', '2023-01-01', 1),

@@ -61,10 +61,15 @@ CREATE TABLE answers (
 	submission_id INTEGER NOT NULL,
 	question_id INTEGER NOT NULL,
 	answer TEXT,
-	option_id INTEGER,
 	FOREIGN KEY (submission_id) REFERENCES submissions(id),
-	FOREIGN KEY (question_id) REFERENCES questions(id),
-	FOREIGN KEY (option_id) REFERENCES question_options(id)
+	FOREIGN KEY (question_id) REFERENCES questions(id)
+);
+
+CREATE TABLE answer_options (
+    answer_id INT NOT NULL REFERENCES answers(id),
+    question_option_id INT NOT NULL REFERENCES question_options(id),
+    PRIMARY KEY (answer_id, question_option_id),
+	UNIQUE (answer_id, question_option_id)
 );
 
 CREATE TABLE orders (
