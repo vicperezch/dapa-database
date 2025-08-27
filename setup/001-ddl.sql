@@ -26,6 +26,15 @@ CREATE TABLE users (
 	license_expiration_date DATE
 );
 
+CREATE TABLE reset_tokens (
+	id SERIAL PRIMARY KEY,
+	token VARCHAR(255) NOT NULL UNIQUE,
+	expiry TIMESTAMP NOT NULL,
+	is_used BOOLEAN NOT NULL DEFAULT false,
+	user_id INTEGER NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 CREATE TABLE question_types (
 	id SERIAL PRIMARY KEY,
 	type VARCHAR(50) NOT NULL
