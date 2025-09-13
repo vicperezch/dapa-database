@@ -1,7 +1,7 @@
 -- ENUMS
 CREATE type form_status AS ENUM('pending', 'cancelled', 'approved');
-CREATE type role AS ENUM('admin', 'driver');
-CREATE type order_type AS ENUM('corporate', 'business', 'personal');
+CREATE type role AS ENUM('admin', 'driver', 'helper');
+CREATE type order_type AS ENUM('corporate', 'move', 'cargo');
 CREATE type order_status AS ENUM('pending', 'assigned', 'pickup', 'collected', 'delivered');
 
 -- TABLAS
@@ -45,6 +45,7 @@ CREATE TABLE questions (
 	question VARCHAR(50) NOT NULL,
 	description VARCHAR(255) DEFAULT NULL,
 	type_id INTEGER NOT NULL,
+	is_required BOOLEAN NOT NULL default true,
 	is_active BOOLEAN NOT NULL DEFAULT true,
 	position INTEGER NOT NULL DEFAULT 1,
 	deleted_at TIMESTAMP DEFAULT NULL,
@@ -85,6 +86,8 @@ CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
     vehicle_id INTEGER,
+	client_name VARCHAR(50) NOT NULL,
+	client_phone VARCHAR(15) NOT NULL,
     origin VARCHAR(100) NOT NULL,
     destination VARCHAR(100) NOT NULL,
 	total_amount DECIMAL(10, 2) NOT NULL,
