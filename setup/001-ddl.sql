@@ -101,3 +101,10 @@ CREATE TABLE orders (
     FOREIGN KEY (submission_id) REFERENCES submissions(id)
 );
 
+CREATE TABLE order_tokens (
+	id SERIAL PRIMARY KEY,
+	order_id INTEGER NOT NULL UNIQUE,
+	token VARCHAR(255) NOT NULL UNIQUE,
+	expiry TIMESTAMP NOT NULL,
+	FOREIGN KEY (order_id) REFERENCES orders(id)
+)
