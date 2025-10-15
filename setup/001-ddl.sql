@@ -105,6 +105,22 @@ CREATE TABLE order_tokens (
 	id SERIAL PRIMARY KEY,
 	order_id INTEGER NOT NULL UNIQUE,
 	token VARCHAR(255) NOT NULL UNIQUE,
-	expiry TIMESTAMP NOT NULL,
+	expiry TIMESTAMP,
 	FOREIGN KEY (order_id) REFERENCES orders(id)
-)
+);
+
+CREATE TABLE expense_types (
+	id SERIAL PRIMARY KEY,
+	type VARCHAR(25) NOT NULL
+);
+
+CREATE TABLE expenses (
+	id SERIAL PRIMARY KEY,
+	date DATE NOT NULL DEFAULT CURRENT_DATE,
+	type_id INTEGER NOT NULL,
+	temporal_employee BOOLEAN NOT NULL,
+	description VARCHAR(255),
+	amount DECIMAL(10, 2) NOT NULL CHECK(amount > 0),
+	FOREIGN KEY (type_id) REFERENCES expense_types(id)
+);
+
