@@ -1,3 +1,5 @@
+SET ROLE dapa_app;
+
 -- ENUMS
 CREATE type form_status AS ENUM('pending', 'cancelled', 'approved');
 CREATE type role AS ENUM('admin', 'driver', 'helper');
