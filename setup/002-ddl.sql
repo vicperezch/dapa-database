@@ -88,6 +88,7 @@ CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
     vehicle_id INTEGER,
+	helper_id INTEGER,
 	client_name VARCHAR(50) NOT NULL,
 	client_phone VARCHAR(15) NOT NULL,
     origin VARCHAR(100) NOT NULL,
