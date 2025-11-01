@@ -93,6 +93,7 @@ CREATE TABLE orders (
     origin VARCHAR(100) NOT NULL,
     destination VARCHAR(100) NOT NULL,
 	total_amount DECIMAL(10, 2) NOT NULL,
+	payment_method VARCHAR(50) NOT NULL,
 	details TEXT,
 	status order_status NOT NULL default 'pending',
 	type order_type NOT NULL,
@@ -124,5 +125,16 @@ CREATE TABLE expenses (
 	description VARCHAR(255),
 	amount DECIMAL(10, 2) NOT NULL CHECK(amount > 0),
 	FOREIGN KEY (type_id) REFERENCES expense_types(id)
+);
+
+CREATE TABLE perfomance_records (	
+	id SERIAL PRIMARY KEY,
+	date DATE NOT NULL DEFAULT CURRENT_DATE,
+	order_goal INTEGER NOT NULL DEFAULT 0,
+	utility_goal DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+	average_per_order_goal DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+	travel_goal INTEGER NOT NULL DEFAULT 0,
+	delivery_goal DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+	achievement_rate_goal DECIMAL(10, 2) NOT NULL DEFAULT 0.00
 );
 
