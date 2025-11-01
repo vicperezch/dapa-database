@@ -127,9 +127,8 @@ CREATE TABLE expenses (
 	FOREIGN KEY (type_id) REFERENCES expense_types(id)
 );
 
-CREATE TABLE perfomance_goals (	
+CREATE TABLE performance_goals (	
 	id SERIAL PRIMARY KEY,
-	date DATE NOT NULL DEFAULT CURRENT_DATE,
 	order_goal INTEGER NOT NULL DEFAULT 0,
 	utility_goal DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
 	average_per_order_goal DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
