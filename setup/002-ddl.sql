@@ -44,7 +44,7 @@ CREATE TABLE question_types (
 
 CREATE TABLE questions (
 	id SERIAL PRIMARY KEY,
-	question VARCHAR(50) NOT NULL,
+	question VARCHAR(100) NOT NULL,
 	description VARCHAR(255) DEFAULT NULL,
 	type_id INTEGER NOT NULL,
 	is_required BOOLEAN NOT NULL default true,
@@ -57,7 +57,7 @@ CREATE TABLE questions (
 CREATE TABLE question_options (
 	id SERIAL PRIMARY KEY,
 	question_id INTEGER NOT NULL,
-	option VARCHAR(50) NOT NULL,
+	option VARCHAR(75) NOT NULL,
 	deleted_at TIMESTAMP DEFAULT NULL,
 	FOREIGN KEY (question_id) REFERENCES questions(id)
 );
