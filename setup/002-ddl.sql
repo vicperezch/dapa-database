@@ -98,6 +98,7 @@ CREATE TABLE orders (
 	details TEXT,
 	status order_status NOT NULL default 'pending',
 	type order_type NOT NULL,
+	meeting_date DATE NOT NULL,
 	date DATE NOT NULL DEFAULT CURRENT_DATE,
 	submission_id INTEGER NOT NULL UNIQUE,
     FOREIGN KEY (user_id) REFERENCES users(id),
