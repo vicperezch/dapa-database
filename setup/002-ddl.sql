@@ -49,6 +49,7 @@ CREATE TABLE questions (
 	type_id INTEGER NOT NULL,
 	is_required BOOLEAN NOT NULL default true,
 	is_active BOOLEAN NOT NULL DEFAULT true,
+	is_mutable BOOLEAN NOT NULL DEFAULT true,
 	position INTEGER NOT NULL DEFAULT 1,
 	deleted_at TIMESTAMP DEFAULT NULL,
 	FOREIGN KEY (type_id) REFERENCES question_types(id)
